@@ -1,0 +1,45 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+#boton{
+    display: block;
+    margin: auto;
+    margin-top: 3vh;
+    padding: 1vh 2vh;
+    background-color: rgb(11, 165, 226);
+    color: white;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+#boton:hover{
+    background-color: rgb(19, 182, 247);
+}
+div{
+    height: 85vh;
+    width: 50%;
+    margin: auto;
+    margin-top: 5vh;
+    overflow: auto;
+}
+table{
+    width: 100%;
+}
+table tr{
+   text-align: center;
+}
+table thead{
+    background-color: black;
+    color: white;
+    height: 5vh;
+}
+table tbody tr{
+    background-color: white;
+    height: 3vh;
+}
+table tbody tr:nth-child(even){
+    background-color: gray;
+}
