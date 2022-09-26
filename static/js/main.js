@@ -2,65 +2,20 @@ const boton = document.querySelector("#boton");
 const datos = document.querySelector("#datos");
 
 boton.addEventListener("click", async function(){
-   let sessionName = await login()
-   let datos = await getQuery(sessionName);
-   
+   let datos = await getDatos();  
    llenarDatos(datos);
 });
 
 /**
- * Retorna un token 
+ * Retorna los datos 
  */
-async function getToken(){
-    let respuesta = await fetch("https://develop.datacrm.la/anieto/anietopruebatecnica/webservice.php?operation=getchallenge&username=prueba")
+async function getDatos(){
+    let respuesta = await fetch("?c=index&m=datos")
     .then(response => response.json())
     .then(data => {
-        token = data.result.token;
-        return token;
-    })
-
-    return respuesta
-}
-
-/**
- * Crea la conexión con el webservices y devuelve la sessionName.
- */
-async function login(){    
-    //guarda el token
-    let token = await getToken();
-    
-    let urlencoded = new URLSearchParams();
-    urlencoded.append("operation", "login");
-    urlencoded.append("username", "prueba");
-    urlencoded.append("accessKey", md5(token + "3DlKwKDMqPsiiK0B"));
-    
-    let respuesta = await fetch("https://develop.datacrm.la/anieto/anietopruebatecnica/webservice.php",{
-        method : "POST",
-        headers : {
-            "Content-Type" : "application/x-www-form-urlencoded"
-        },
-        body : urlencoded
-    })
-    .then(response => response.json())
-    .then(data =>{
-        sessionName = data.result.sessionName;
-        return sessionName;
-    })
-
-    return respuesta;
-}
-
-/**
- * Retorna los datos en un array.
- * 
- * @param {string} sessionName Nombre de la sesion.
- */
-async function getQuery(sessionName){
-    let respuesta = await fetch("https://develop.datacrm.la/anieto/anietopruebatecnica/webservice.php?operation=query&sessionName=" + sessionName + "&query=select * from Contacts;")
-    .then(response => response.json())
-    .then(data =>{
         return data.result;
     })
+
     return respuesta
 }
 
